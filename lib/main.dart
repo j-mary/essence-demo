@@ -2,7 +2,8 @@ import 'package:essence_demo/bloc/bloc_demo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'block_demo.dart';
+import 'cubit/cubit_demo_cubit.dart';
+import 'cubit_demo.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late final BlocDemoBloc _blocDemoBloc;
+  late final CubitDemoCubit _cubitDemoCubit;
 
   @override
   void initState() {
@@ -45,10 +47,12 @@ class _MyAppState extends State<MyApp> {
 
   void _createBloc() {
     _blocDemoBloc = BlocDemoBloc();
+    _cubitDemoCubit = CubitDemoCubit();
   }
 
   void _disposeBloc() {
     _blocDemoBloc.close();
+    _cubitDemoCubit.close();
   }
 
   @override
@@ -56,6 +60,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<BlocDemoBloc>.value(value: _blocDemoBloc),
+        BlocProvider<CubitDemoCubit>.value(value: _cubitDemoCubit),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -63,7 +68,9 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: BlocDemo(),
+        // home: WebViewExample()
+        // home: BlocDemo(),
+        home: CubitDemo(),
       ),
     );
   }
